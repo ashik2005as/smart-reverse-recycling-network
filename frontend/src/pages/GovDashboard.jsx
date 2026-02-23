@@ -12,32 +12,32 @@ const ALERTS = [
   { id: 5, location: 'Ambattur, Chennai',       lat: 13.1143, lng: 80.1548, severity: 'medium', status: 'active',   type: 'Solar Panels' },
 ]
 
-// Waste heatmap points across India (simulated)
+// Waste heatmap points across India (2026 projections)
 const HEATMAP_POINTS = [
-  { lat: 28.7041, lng: 77.1025, popup: '<b>Delhi NCR</b><br>Projected: 2,840 MT batteries by 2026', color: '#c62828' },
-  { lat: 19.0760, lng: 72.8777, popup: '<b>Mumbai Metro</b><br>Projected: 2,100 MT', color: '#c62828' },
-  { lat: 12.9716, lng: 77.5946, popup: '<b>Bangalore</b><br>Projected: 1,850 MT', color: '#e53935' },
-  { lat: 22.5726, lng: 88.3639, popup: '<b>Kolkata</b><br>Projected: 1,200 MT', color: '#f57c00' },
-  { lat: 13.0827, lng: 80.2707, popup: '<b>Chennai</b><br>Projected: 980 MT', color: '#f57c00' },
-  { lat: 17.3850, lng: 78.4867, popup: '<b>Hyderabad</b><br>Projected: 890 MT', color: '#ffa726' },
-  { lat: 23.0225, lng: 72.5714, popup: '<b>Ahmedabad</b><br>Projected: 760 MT', color: '#ffa726' },
-  { lat: 26.9124, lng: 75.7873, popup: '<b>Jaipur (Solar Hub)</b><br>Projected: 620 MT panels', color: '#66bb6a' },
-  { lat: 21.1458, lng: 79.0882, popup: '<b>Nagpur</b><br>Projected: 540 MT', color: '#66bb6a' },
-  { lat: 11.0168, lng: 76.9558, popup: '<b>Coimbatore</b><br>Projected: 420 MT', color: '#a5d6a7' },
+  { lat: 28.7041, lng: 77.1025, popup: '<b>Delhi NCR</b><br>2026 actual: 3,200 MT batteries', color: '#c62828' },
+  { lat: 19.0760, lng: 72.8777, popup: '<b>Mumbai Metro</b><br>2026 actual: 2,450 MT',        color: '#c62828' },
+  { lat: 12.9716, lng: 77.5946, popup: '<b>Bangalore</b><br>2026 actual: 2,100 MT',           color: '#e53935' },
+  { lat: 22.5726, lng: 88.3639, popup: '<b>Kolkata</b><br>2026 actual: 1,380 MT',             color: '#f57c00' },
+  { lat: 13.0827, lng: 80.2707, popup: '<b>Chennai</b><br>2026 actual: 1,150 MT',             color: '#f57c00' },
+  { lat: 17.3850, lng: 78.4867, popup: '<b>Hyderabad</b><br>2026 actual: 1,020 MT',           color: '#ffa726' },
+  { lat: 23.0225, lng: 72.5714, popup: '<b>Ahmedabad</b><br>2026 actual: 880 MT',             color: '#ffa726' },
+  { lat: 26.9124, lng: 75.7873, popup: '<b>Jaipur (Solar Hub)</b><br>2026 actual: 720 MT panels', color: '#66bb6a' },
+  { lat: 21.1458, lng: 79.0882, popup: '<b>Nagpur</b><br>2026 actual: 620 MT',                color: '#66bb6a' },
+  { lat: 11.0168, lng: 76.9558, popup: '<b>Coimbatore</b><br>2026 actual: 490 MT',            color: '#a5d6a7' },
 ]
 
-// Battery waste forecast by state
+// Battery waste forecast by state (2026)
 const wasteForecastData = {
   labels: ['Delhi', 'MH', 'KA', 'WB', 'TN', 'TS', 'GJ', 'RJ', 'UP', 'MP'],
   datasets: [
     {
-      label: 'Batteries (MT) 2025',
-      data: [2840, 2100, 1850, 1200, 980, 890, 760, 620, 540, 420],
+      label: 'Batteries (MT) 2026',
+      data: [3200, 2450, 2100, 1380, 1150, 1020, 880, 720, 620, 490],
       backgroundColor: '#00897b',
     },
     {
-      label: 'Solar Panels (MT) 2025',
-      data: [1200, 1800, 900, 450, 680, 520, 1400, 2100, 360, 780],
+      label: 'Solar Panels (MT) 2026',
+      data: [1380, 2050, 1020, 520, 780, 600, 1580, 2400, 410, 890],
       backgroundColor: '#1565c0',
     },
   ],
@@ -48,19 +48,19 @@ const capacityData = {
   labels: ['GreenRecycle Ltd', 'EcoMetal India', 'SolarWaste Co', 'NationalBattery', 'CleanCycle'],
   datasets: [{
     label: 'Utilisation %',
-    data: [87, 72, 45, 91, 63],
+    data: [91, 78, 52, 95, 69],
     backgroundColor: ['#c62828', '#f57c00', '#66bb6a', '#c62828', '#ffa726'],
   }],
 }
 
-// ESG Metrics
+// ESG Metrics — 2026
 const ESG = {
-  carbon_credits_issued: 12400,
-  trees_equivalent: 87300,
-  water_saved_kl: 4200,
-  informal_jobs_formalised: 3840,
-  compliance_score: 94,
-  waste_diverted_mt: 11.4,
+  carbon_credits_issued: 15623,
+  trees_equivalent: 109800,
+  water_saved_kl: 5840,
+  informal_jobs_formalised: 4920,
+  compliance_score: 96,
+  waste_diverted_mt: 28.6,
 }
 
 function GovDashboard() {
@@ -74,7 +74,7 @@ function GovDashboard() {
     <div>
       <div className="page-header">
         <h1>🏛️ Government Dashboard</h1>
-        <p>National-level oversight, forecasting, and compliance monitoring</p>
+        <p>National-level oversight, forecasting, and compliance monitoring — Feb 2026</p>
       </div>
 
       {/* ESG Metrics */}
@@ -103,7 +103,7 @@ function GovDashboard() {
       {/* Charts */}
       <div className="charts-grid" style={{ marginBottom: 28 }}>
         <ChartWidget
-          title="📊 Projected Waste by State (2025)"
+          title="📊 Projected Waste by State (2026)"
           type="bar"
           data={wasteForecastData}
         />
