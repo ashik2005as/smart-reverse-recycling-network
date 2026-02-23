@@ -1,0 +1,67 @@
+version: "3.9"
+
+services:
+  # ── PostgreSQL with PostGIS extension ─────────────────────────────────────
+  postgres:
+    image: postgis/postgis:15-3.4
+    container_name: smartrecycle_db
+    environment:
+      POSTGRES_DB: smartrecycling
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis (caching, queue) ─────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: smartrecycle_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  # ── FastAPI Backend ────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: smartrecycle_backend
+    environment:
+      DATABASE_URL: postgresql://postgres:password@postgres:5432/smartrecycling
+      REDIS_URL: redis://redis:6379/0
+      USE_MOCK_DATA: "false"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - ./backend:/app
+      - ./ai_models:/ai_models
+    restart: unless-stopped
+
+  # ── React Frontend ─────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: smartrecycle_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
