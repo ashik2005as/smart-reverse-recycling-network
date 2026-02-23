@@ -4,7 +4,7 @@ Works without TensorFlow by using a heuristic fallback (suitable for demo).
 """
 import os
 import random
-import string
+import secrets
 from dataclasses import dataclass
 from typing import Optional
 
@@ -49,7 +49,8 @@ class BatteryHealthPredictor:
 
     @staticmethod
     def _generate_passport_id() -> str:
-        return "DP-" + "".join(random.choices(string.ascii_uppercase + string.digits, k=8))
+        """Generate a cryptographically secure unique Battery Digital Passport ID."""
+        return "DP-" + secrets.token_hex(4).upper()
 
     def _heuristic_predict(self, voltage: float, current: float, temperature: float,
                            cycles: int, capacity: float) -> BatteryHealthResult:
@@ -77,7 +78,7 @@ class BatteryHealthPredictor:
             thermal_anomaly=thermal_anomaly,
             recommendation=recommendation,
             confidence=round(0.88 + random.uniform(0, 0.10), 2),
-            digital_passport_id=self._generate_passport_id(),
+        digital_passport_id=self._generate_passport_id(),
             carbon_credits=round(soh * 0.023, 2),
         )
 

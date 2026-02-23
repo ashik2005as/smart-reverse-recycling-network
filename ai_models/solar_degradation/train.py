@@ -33,7 +33,14 @@ def generate_synthetic_data(n_samples: int = 4000, input_steps: int = 12, n_feat
             irr   = rng.uniform(200, 800)           # W/m²
             dust  = rng.uniform(0, 1)
             age_t = age + t / 12
-            seq.append([eff_t / 22, tmp_t / 60, irr / 1000, dust, age_t / 25])
+            # Clip normalised values to [0, 1] to handle out-of-range data gracefully
+            seq.append([
+                max(0.0, min(1.0, eff_t / 22)),   # efficiency / max_efficiency (22%)
+                max(0.0, min(1.0, tmp_t / 60)),   # temperature / max_temp (60°C)
+                max(0.0, min(1.0, irr / 1000)),   # irradiance / max_irradiance (1000 W/m²)
+                dust,
+                max(0.0, min(1.0, age_t / 25)),   # age / panel_lifetime (25 years)
+            ])
 
         X.append(seq)
         y.append(deg_true)

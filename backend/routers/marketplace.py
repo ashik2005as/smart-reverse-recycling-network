@@ -1,14 +1,12 @@
 """
 Marketplace CRUD router.
 """
-import random
-import string
+import secrets
 from typing import List
 
 from fastapi import APIRouter
 from schemas.marketplace import (
     MarketplaceListingCreate,
-    MarketplaceListingResponse,
     BookingRequest,
     BookingResponse,
 )
@@ -52,7 +50,7 @@ def create_listing(listing: MarketplaceListingCreate):
 @router.post("/book", response_model=BookingResponse)
 def book_pickup(req: BookingRequest):
     """Book a pickup for a marketplace listing."""
-    conf_id = "PB-" + "".join(random.choices(string.ascii_uppercase + string.digits, k=6))
+    conf_id = "PB-" + secrets.token_hex(3).upper()
     return BookingResponse(
         confirmation_id=conf_id,
         message=f"Pickup booked! Confirmation {conf_id}. You will receive an email within 2 hours.",

@@ -41,7 +41,7 @@ function SolarDegradation() {
     const age = parseFloat(f.age) || 5
     const temp = parseFloat(f.temperature) || 35
     const degradationScore = Math.min(100, age * 4.5 + Math.max(0, temp - 35) * 0.8)
-    const efficiencyDrop = (age * 0.7 + (temp - 25) * 0.05).toFixed(1)
+    const efficiencyDrop = Math.max(0, age * 0.7 + (temp - 25) * 0.05).toFixed(1)
     const replacement = Math.max(1, Math.round(25 - age - degradationScore / 10))
     const hotspot = temp > 50 || degradationScore > 60
 

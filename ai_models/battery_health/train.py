@@ -27,7 +27,11 @@ def generate_synthetic_data(n_samples: int = 5000, input_steps: int = 10, n_feat
         temp = rng.uniform(15, 55)
         capacity = rng.uniform(20, 100)
 
-        # SOH ground truth
+        # SOH ground truth using simplified degradation model:
+        #   3000 cycles = typical end-of-life for Li-ion (0% SOH at 3000 cycles)
+        #   40°C = thermal degradation threshold (above this, extra degradation kicks in)
+        #   200 = scale factor mapping excess temperature to SOH reduction
+        #   0.15 = minimum clamped SOH (15% floor for end-of-life state)
         soh_true = max(0.15, min(1.0, 1.0 - cycles / 3000 - max(0, temp - 40) / 200))
 
         # Generate sequence of readings

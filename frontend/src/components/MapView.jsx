@@ -28,6 +28,12 @@ function MapView({ center = [20.5937, 78.9629], zoom = 5, markers = [], height =
     }).addTo(mapInstanceRef.current)
   }, [])
 
+  // Update map view when center or zoom props change
+  useEffect(() => {
+    if (!mapInstanceRef.current) return
+    mapInstanceRef.current.setView(center, zoom)
+  }, [center, zoom])
+
   // Update markers when data changes
   useEffect(() => {
     if (!mapInstanceRef.current) return

@@ -58,7 +58,7 @@ function Marketplace() {
 
   const confirmBooking = (e) => {
     e.preventDefault()
-    setBookingMsg(`✅ Pickup booked! Confirmation ID: PB-${Math.random().toString(36).substr(2, 6).toUpperCase()}. You'll receive an email within 2 hours.`)
+    setBookingMsg(`✅ Pickup booked! Confirmation ID: PB-${Math.random().toString(36).slice(2, 8).toUpperCase()}. You'll receive an email within 2 hours.`)
   }
 
   return (

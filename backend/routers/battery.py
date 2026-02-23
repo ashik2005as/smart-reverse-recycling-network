@@ -2,16 +2,15 @@
 Battery API router — CRUD + AI health prediction endpoint.
 """
 import random
-import string
+import secrets
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from database import get_db
 from schemas.battery import (
     BatteryCreate,
-    BatteryResponse,
     BatteryPredictRequest,
     BatteryPredictResponse,
 )
@@ -20,7 +19,8 @@ router = APIRouter()
 
 
 def _generate_passport_id() -> str:
-    return "DP-" + "".join(random.choices(string.ascii_uppercase + string.digits, k=8))
+    """Generate a cryptographically secure unique Digital Passport ID."""
+    return "DP-" + secrets.token_hex(4).upper()
 
 
 def _predict_battery_health(req: BatteryPredictRequest) -> BatteryPredictResponse:
@@ -72,7 +72,7 @@ def list_batteries(db: Session = Depends(get_db)):
 @router.post("/", response_model=dict, status_code=201)
 def create_battery(battery: BatteryCreate, db: Session = Depends(get_db)):
     """Register a new battery asset."""
-    return {**battery.model_dump(), "id": random.randint(1000, 9999), "digital_passport_id": _generate_passport_id()}
+    return {**battery.model_dump(), "id": secrets.randbelow(9000) + 1000, "digital_passport_id": _generate_passport_id()}
 
 
 @router.get("/{battery_id}", response_model=dict)

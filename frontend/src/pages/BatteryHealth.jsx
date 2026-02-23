@@ -62,7 +62,7 @@ function BatteryHealth() {
       thermal_anomaly: thermal,
       recommendation,
       confidence: (0.88 + Math.random() * 0.10).toFixed(2),
-      digital_passport_id: `DP-${Math.random().toString(36).substr(2, 8).toUpperCase()}`,
+      digital_passport_id: `DP-${Math.random().toString(36).slice(2, 10).toUpperCase()}`,
       carbon_credits: (soh * 0.023).toFixed(2),
     }
   }

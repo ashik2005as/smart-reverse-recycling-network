@@ -134,6 +134,10 @@ class VRPOptimizer:
 
             params = pywrapcp.DefaultRoutingSearchParameters()
             params.first_solution_strategy = routing_enums_pb2.FirstSolutionStrategy.PATH_CHEAPEST_ARC
+            # PATH_CHEAPEST_ARC: repeatedly adds the cheapest (shortest) arc to the route.
+            # Chosen for speed and good quality on medium-sized instances (10-50 stops).
+            # Alternatives: AUTOMATIC (let OR-Tools choose), PATH_MOST_CONSTRAINED_ARC (better
+            # for heavily capacity-constrained problems).
             params.time_limit.seconds = 10
 
             solution = routing.SolveWithParameters(params)
