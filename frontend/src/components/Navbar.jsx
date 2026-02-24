@@ -3,13 +3,18 @@ import { NavLink } from 'react-router-dom'
 
 // Navigation sidebar with green/blue sustainability theme
 const navItems = [
-  { path: '/',                 icon: '📊', label: 'Dashboard' },
-  { path: '/battery-health',   icon: '🔋', label: 'Battery Health' },
-  { path: '/solar-degradation',icon: '☀️', label: 'Solar Degradation' },
-  { path: '/route-optimizer',  icon: '🗺️', label: 'Route Optimizer' },
-  { path: '/material-recovery',icon: '♻️', label: 'Material Recovery' },
-  { path: '/marketplace',      icon: '🏪', label: 'Marketplace' },
-  { path: '/gov-dashboard',    icon: '🏛️', label: 'Gov Dashboard' },
+  { path: '/',                  icon: '📊', label: 'Dashboard' },
+  { path: '/battery-health',    icon: '🔋', label: 'Battery Health' },
+  { path: '/solar-degradation', icon: '☀️', label: 'Solar Degradation' },
+  { path: '/route-optimizer',   icon: '🗺️', label: 'Route Optimizer' },
+  { path: '/material-recovery', icon: '♻️', label: 'Material Recovery' },
+  { path: '/marketplace',       icon: '🏪', label: 'Marketplace' },
+  { path: '/gov-dashboard',     icon: '🏛️', label: 'Gov Dashboard' },
+  { path: '/decision-engine',   icon: '🔄', label: 'Decision Engine' },
+  { path: '/digital-passport',  icon: '📜', label: 'Digital Passport' },
+  { path: '/facility-locator',  icon: '🏭', label: 'Facility Locator' },
+  { path: '/impact-calculator', icon: '🌍', label: 'Impact Calculator' },
+  { path: '/alerts',            icon: '🔔', label: 'Alerts' },
 ]
 
 function Navbar() {

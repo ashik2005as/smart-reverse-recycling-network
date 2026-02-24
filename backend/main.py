@@ -12,6 +12,11 @@ from routers import (
     marketplace,
     dashboard,
     gov_dashboard,
+    decision_engine,
+    digital_passport,
+    facility_locator,
+    impact_calculator,
+    alerts,
 )
 
 app = FastAPI(
@@ -40,6 +45,11 @@ app.include_router(material_recovery.router,prefix="/api/material-recovery",tags
 app.include_router(marketplace.router,      prefix="/api/marketplace",      tags=["Marketplace"])
 app.include_router(dashboard.router,        prefix="/api/dashboard",        tags=["Dashboard"])
 app.include_router(gov_dashboard.router,    prefix="/api/gov",              tags=["Government Dashboard"])
+app.include_router(decision_engine.router,  prefix="/api/decision",         tags=["Decision Engine"])
+app.include_router(digital_passport.router, prefix="/api/passport",         tags=["Digital Passport"])
+app.include_router(facility_locator.router, prefix="/api/facilities",       tags=["Facility Locator"])
+app.include_router(impact_calculator.router,prefix="/api/impact",           tags=["Impact Calculator"])
+app.include_router(alerts.router,           prefix="/api/alerts",           tags=["Alerts"])
 
 
 @app.get("/", tags=["Health"])
