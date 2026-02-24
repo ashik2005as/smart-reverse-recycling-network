@@ -9,6 +9,11 @@ import RouteOptimizer from './pages/RouteOptimizer'
 import MaterialRecovery from './pages/MaterialRecovery'
 import Marketplace from './pages/Marketplace'
 import GovDashboard from './pages/GovDashboard'
+import DecisionEngine from './pages/DecisionEngine'
+import DigitalPassport from './pages/DigitalPassport'
+import FacilityLocator from './pages/FacilityLocator'
+import ImpactCalculator from './pages/ImpactCalculator'
+import Alerts from './pages/Alerts'
 
 function App() {
   return (
@@ -24,6 +29,11 @@ function App() {
             <Route path="/material-recovery" element={<MaterialRecovery />} />
             <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/gov-dashboard" element={<GovDashboard />} />
+            <Route path="/decision-engine" element={<DecisionEngine />} />
+            <Route path="/digital-passport" element={<DigitalPassport />} />
+            <Route path="/facility-locator" element={<FacilityLocator />} />
+            <Route path="/impact-calculator" element={<ImpactCalculator />} />
+            <Route path="/alerts" element={<Alerts />} />
           </Routes>
         </main>
         <Footer />
