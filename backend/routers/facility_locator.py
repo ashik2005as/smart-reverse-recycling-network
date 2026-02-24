@@ -54,8 +54,7 @@ def nearest_facilities(
     result = _FACILITIES
     if type:
         result = [f for f in result if f["type"] == type]
-    for f in result:
-        f = dict(f)
+    result = [dict(f) for f in result]
     result = sorted(result, key=lambda f: _haversine(lat, lng, f["lat"], f["lng"]))
     for f in result:
         f["distance_km"] = round(_haversine(lat, lng, f["lat"], f["lng"]), 1)

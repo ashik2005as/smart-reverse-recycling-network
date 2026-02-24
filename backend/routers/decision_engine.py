@@ -100,16 +100,16 @@ def _analyze_solar(req: DecisionRequest) -> dict:
         value_recovery = 55.0
         co2_saved = round(eff * 3.5, 1)
         facility = "SolarTech Services, Hyderabad"
-    elif eff < 12 or age > 20:
+    elif eff < 12 or (age > 20 and eff < 15):
         decision = "recycle"
-        reasoning = "Efficiency < 12% or age > 20 years: Silicon and silver recovery is most economical at this stage."
+        reasoning = "Efficiency < 12% or panel aged >20 years with declining efficiency: Silicon and silver recovery is most economical at this stage."
         next_steps = ["Decommission panel", "Transport to recycler", "Recover Si/Ag/Al/glass", "Issue recycling certificate"]
         value_recovery = 35.0
         co2_saved = round(eff * 1.9, 1)
         facility = "SolarWaste Co, Ahmedabad"
     else:
         decision = "dispose"
-        reasoning = "Degradation > 80%: Panel is severely degraded. Certified disposal is required."
+        reasoning = "Panel is severely degraded. Certified disposal is required."
         next_steps = ["Contact certified disposal facility", "Arrange transport", "Get disposal certificate", "Log in compliance system"]
         value_recovery = 10.0
         co2_saved = round(eff * 0.5, 1)
