@@ -17,6 +17,7 @@ from routers import (
     facility_locator,
     impact_calculator,
     alerts,
+    chatbot,
 )
 
 app = FastAPI(
@@ -50,6 +51,7 @@ app.include_router(digital_passport.router, prefix="/api/passport",         tags
 app.include_router(facility_locator.router, prefix="/api/facilities",       tags=["Facility Locator"])
 app.include_router(impact_calculator.router,prefix="/api/impact",           tags=["Impact Calculator"])
 app.include_router(alerts.router,           prefix="/api/alerts",           tags=["Alerts"])
+app.include_router(chatbot.router,          prefix="/api/chatbot",          tags=["Chatbot"])
 
 
 @app.get("/", tags=["Health"])
